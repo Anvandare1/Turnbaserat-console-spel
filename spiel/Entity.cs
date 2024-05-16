@@ -12,7 +12,7 @@ namespace spiel
         public int KillPoints{get{return killpoints;}}
         public string Name{get{return name;}}
         /// <summary>
-        /// Baskonstruktor för alla entities, skapar en ny entiy med attributer angivna i subklasser
+        /// Baskonstruktor för alla entities, skapar en ny entity med attributer angivna i subklasser
         /// </summary>
         /// <param name="hp"></param>
         /// <param name="attackpower"></param>
@@ -25,7 +25,7 @@ namespace spiel
         }
 
         /// <summary>
-        /// Tar in en referens till en annan entity, d.v.s måltavlan för anfallet
+        /// Tar in en referens till en annan entity, d.v.s måltavlan för anfallet och kallar dess TakeDamage-Funktion
         /// </summary>
         /// <param name="target"></param>
         public virtual int Attack(Entity target)

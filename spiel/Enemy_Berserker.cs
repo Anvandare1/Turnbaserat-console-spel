@@ -11,10 +11,10 @@ namespace spiel
         public override int TakeDamage(int damage)
         {
             rage += damage;
-            if(rage > 10)
+            if(rage > 5)
             {
-                Console.WriteLine("Berserker healed for 5 points");
-                hp += 5;
+                Console.WriteLine("Berserker attack power increased!");
+                attackpower += rage;
                 rage = 0;
             }
             return base.TakeDamage(damage);

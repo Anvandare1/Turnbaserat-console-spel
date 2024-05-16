@@ -4,9 +4,11 @@ namespace spiel
     {
         private int mana;
         public int Mana{get{return mana;} set{mana -= value;}}
-        public Player(int mana) : base(20, 5, 0, "Player")
+        
+        //Konsturktor specialiserad för spelar-klassen, 
+        public Player() : base(20, 5, 0, "Player")
         {
-            this.mana = mana;
+            this.mana = 10;
         }
     }
 }

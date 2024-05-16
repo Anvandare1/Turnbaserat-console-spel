@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\Desktop\\spiel\\spiel.csproj",
+      "projectUniqueName": "C:\\Users\\Admin\\Documents\\GitHub\\Turnbaserat-console-spel\\spiel.csproj",
       "projectName": "spiel",
-      "projectPath": "C:\\Users\\Admin\\Desktop\\spiel\\spiel.csproj",
+      "projectPath": "C:\\Users\\Admin\\Documents\\GitHub\\Turnbaserat-console-spel\\spiel.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\Desktop\\spiel\\obj\\",
+      "outputPath": "C:\\Users\\Admin\\Documents\\GitHub\\Turnbaserat-console-spel\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
