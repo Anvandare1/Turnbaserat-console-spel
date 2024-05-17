@@ -2,17 +2,19 @@
 using spiel;
 
 //De globala variabler som används av spelet, t.ex antal rundon, totalt antal kills, poäng o.s.v
-bool gameover = false;
+bool roundover = false;
+bool gameover = false; 
 bool introduction = true;
 int kills = 0;
 int rounds = 0;
 int points = 0;
+int turnpoints = 5;
 List<Entity> enemies = new List<Entity>();
 List<int> roundpoints = new List<int>();
 Player player;
 
 //Spelets huvud-loop, körs alltid
-while(true)
+while(!gameover)
 {
     Console.Clear();
     //kontrollerar om detta är fösta gången loopen körs (vilket innebär första rundan av spelomgången), ger möjlighet att spela en tutorial om så är fallet
@@ -38,7 +40,7 @@ while(true)
     //Kallar funktioner vilken skapar alla klasser som ska användas under spelgången
     StartGame();
     //loopen som spelrundan körs i, upprepas tills rundan är över
-    while(!gameover)
+    while(!roundover)
     {
         PlayerTurn();
         EnemyTurn();
@@ -93,11 +95,13 @@ void PlayerTurn()
     Console.WriteLine("Attack (Attack a target)");
     Console.WriteLine("Stats (Display players current stats)");
     Console.WriteLine("Spells (Display avilable spells)");
+    Console.WriteLine("Misc (Perform a misc action)");
+    Console.WriteLine("Surrender (Surrender the battle)");
     Console.WriteLine("");
 
     string input = Console.ReadLine();
     //kontrollerar om splarens input är felaktigt och om så är fallet visas felmedelande och Playerturn metoden kallas igen
-    if(input != "Stats" && input != "Attack" && input!= "Spells")
+    if(input != "Stats" && input != "Attack" && input!= "Spells" && input!= "Misc" && input!= "Surrender")
     {
         Console.Clear();
         Console.WriteLine("Error: Invalid Command");
@@ -127,8 +131,9 @@ void PlayerTurn()
             }
             if(enemies.Count == 0)
             {
-                gameover = true;
+                roundover = true;
             }
+            turnpoints = 5;
             Console.ReadLine();
         }
 
@@ -148,6 +153,8 @@ void PlayerTurn()
         Console.WriteLine("Health: " + player.HP);
         Console.WriteLine("Attack Power: " + player.AttackPower);
         Console.WriteLine("Mana: " + player.Mana);
+        Console.WriteLine("Defense: " + player.Defense);
+        Console.WriteLine("Turn Points: " + turnpoints);
         Console.ReadLine();
 
         PlayerTurn();
@@ -195,7 +202,7 @@ void PlayerTurn()
                 }
                 if(enemies.Count == 0)
                 {
-                    gameover = true;
+                    roundover = true;
                 }
                 player.Mana = 10;
                 Console.ReadLine();
@@ -209,10 +216,36 @@ void PlayerTurn()
             }
         }
         //If-Statement förebygger softlock bugg om Smite dödar sista fienden, utan det fastnar spelet i Handlingsmenyn/Playerturn-Funktionen utan möjlighet att nå gameover state
-        if(!gameover)
+        if(!roundover)
         {
             PlayerTurn();
         }
+    }
+
+    if(input == "Misc")
+    {
+        Console.Clear();
+        Console.WriteLine("Misc Actions: ");
+        Console.WriteLine("Defend (Adds defense to the player) [Cost: 3 Turn Points]");
+        
+        input = Console.ReadLine();
+
+        if(input == "Defend" && turnpoints >= 3)
+        {
+            turnpoints -= 3;
+            player.MiscActions(0);
+            Console.WriteLine("Defense increased by 5");
+            Console.ReadLine();
+        }
+
+        PlayerTurn();
+    }
+
+    if(input == "Surrender")
+    {
+        player.TakeDamage(800);
+        gameover = true;
+        roundover = true;
     }
 }
 
@@ -231,12 +264,14 @@ void DisplayEnemies()
 void GameOver()
 {
     Console.WriteLine("");
-    //Om spelaren är död avslutas spelet och en nu runda kan ej påbörjas, funktioner utför de sista handlingarna innan spelet låser sig (per design) till gameover skärmen
+    //Om spelaren är död avslutas spelet och en nu runda kan ej påbörjas, funktioner utför de sista handlingarna innan programmet avslutas
     if(player.HP <= 0)
     {
         string filepath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) +@"\NotAVirus";
+        //Sorterar en lista med poäng från spelade rundor envligt elements värde i stigande ordning och inverterar dess ordning sedan för att få högst poäng först
         roundpoints.Sort();
         roundpoints.Reverse();
+        //Om directory MyDocuments/NotAVirus ej finns skapas det och med filen GameResults.txt vilken fylls med information angående sinaste spelomgången, om directory of fil finns skrivs dess innehåll över
         if(!Directory.Exists(filepath))
         {
             Directory.CreateDirectory(filepath);
@@ -260,9 +295,10 @@ void GameOver()
         Console.WriteLine("You have slain " + kills + " enemies");
         Console.WriteLine("You survied " + rounds + " battles");
         Console.WriteLine("Statistics from this run can be found at " + filepath + @"\GameResults.txt");
+        gameover = true;
         Console.ReadLine();
         Console.Clear();
-        GameOver();
+        //GameOver();
     }
 
     //Om alla fiender är döda avslutas spelet och en ny runda kan påbörjas, funktioner förbereder den nya rundan
@@ -274,7 +310,7 @@ void GameOver()
         Console.WriteLine("You stand victorious, but at what cost?");
         Console.WriteLine("Enter any command to continue");
         Console.ReadLine();
-        gameover = false;
+        roundover = false;
     }
 }
 
@@ -300,7 +336,7 @@ void EnemyTurn()
     //kontrollerar om spelaren är död efter fienders drag, om så är fallet sätts gameover till true och avslutar därmed spel-loopen
     if(player.HP <= 0)
     {
-        gameover = true;
+        roundover = true;
     }
     Console.ReadLine();
 }

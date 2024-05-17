@@ -47,6 +47,8 @@ namespace spiel
             Console.WriteLine("Attack (Attack a target)");
             Console.WriteLine("Stats (Display players current stats)");
             Console.WriteLine("Spells (Display avilable spells)");
+            Console.WriteLine("Misc (Perform a misc action)");
+            Console.WriteLine("Surrender (Surrender the battle)");
             Console.WriteLine("");
             Console.WriteLine("In order to perform any given action you enter the action as stated in the Actions list, without (text in here)");
             Console.WriteLine("Input is case sensitive and any invalid input at any point will display an error and return you here without progressing the timeline");
@@ -118,6 +120,8 @@ namespace spiel
             Console.WriteLine("Health: 20");
             Console.WriteLine("Attack Power: 5");
             Console.WriteLine("Mana: 10");
+            Console.WriteLine("Defense: 0");
+            Console.WriteLine("Turn Points: 5");
             Console.WriteLine("");
             Console.WriteLine("If you entered Stats as indicated in the Actions menu you will be brought to this screen");
             Console.WriteLine("Here you will se the stats of your player such as your remaning health, and mana");
@@ -144,11 +148,34 @@ namespace spiel
             Console.ReadLine();
             Console.Clear();
 
+            //Skriver ut information hur misc menyn avläses och används
+            Console.WriteLine("Advanced Actions: Misc");
+            Console.WriteLine("");
+            Console.WriteLine("Misc Actions: ");
+            Console.WriteLine("Defend (Adds 5 defense to the player) [Cost: 3 Turn Points]");
+            Console.WriteLine("");
+            Console.WriteLine("In this menu you can perform misc actions at the cost of Turn Points");
+            Console.WriteLine("These are a temporary resource that replenishes each turn");
+            Console.WriteLine("Same as with the spells menu the cost of each action is indicated in the square brackets");
+            Console.WriteLine("");
+            Console.WriteLine("Enter any input to continue");
+            Console.ReadLine();
+            Console.Clear();
+
+            //Skriver ut information om Surrender mekaniken
+            Console.WriteLine("Surrendering");
+            Console.WriteLine("");
+            Console.WriteLine("Using the Surrender action in the Actions menu will end the ongoing game right away");
+            Console.WriteLine("");
+            Console.WriteLine("Enter any input to continue");
+            Console.ReadLine();
+            Console.Clear();
+
             //Beskriver hur spelet är uppbygt, hur spelomgångar, rundor or gameover stadier fungerar
             Console.WriteLine("Game pogression");
             Console.WriteLine("");
-            Console.WriteLine("A game is made up of rounds, a round ends when one of two conditions are fulfilled: ");
-            Console.WriteLine("All enemies are defeated, or the player dies (player health reaches 0 or below)");
+            Console.WriteLine("A game is made up of rounds, a round ends when one of three conditions are fulfilled: ");
+            Console.WriteLine("All enemies are defeated, or the player dies (player health reaches 0 or below) or the player surrender");
             Console.WriteLine("If all enemies are defated a new round can begin, at the start of the round a new set of enemies will be spawned");
             Console.WriteLine("Aditionally all the players resources will be reset to their initial state");
             Console.WriteLine("If the round ends by the player being killed the game is over and a stat file will be created highlighting the player's performance of that game");
