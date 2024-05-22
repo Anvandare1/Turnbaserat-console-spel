@@ -154,6 +154,7 @@ void PlayerTurn()
         Console.WriteLine("Attack Power: " + player.AttackPower);
         Console.WriteLine("Mana: " + player.Mana);
         Console.WriteLine("Defense: " + player.Defense);
+        Console.WriteLine("Bonus Damage: " + player.BonusDamage);
         Console.WriteLine("Turn Points: " + turnpoints);
         Console.ReadLine();
 
@@ -227,7 +228,7 @@ void PlayerTurn()
         Console.Clear();
         Console.WriteLine("Misc Actions: ");
         Console.WriteLine("Defend (Adds defense to the player) [Cost: 3 Turn Points]");
-        
+        Console.WriteLine("Sharpen Blade (Adds 5 damage to your next attack, progresses timeline) [Cost: 5 Turn Points]");        
         input = Console.ReadLine();
 
         if(input == "Defend" && turnpoints >= 3)
@@ -236,9 +237,32 @@ void PlayerTurn()
             player.MiscActions(0);
             Console.WriteLine("Defense increased by 5");
             Console.ReadLine();
+            //input = "Defend";
         }
 
-        PlayerTurn();
+        else if(input == "Sharpen Blade" && turnpoints >= 5)
+        {
+            turnpoints -= 5;
+            player.MiscActions(1);
+            Console.WriteLine("5 bonus damage for next attack");
+            Console.ReadLine();
+            turnpoints = 5;
+            //input = "Sharpen Blade";
+        }
+
+        else
+        {
+            Console.Clear();
+            Console.WriteLine("Error performing action");
+            Console.ReadLine();
+            PlayerTurn();
+        }
+
+        if(input != "Sharpen Blade")
+        {
+            PlayerTurn();
+        }
+        //PlayerTurn();
     }
 
     if(input == "Surrender")
