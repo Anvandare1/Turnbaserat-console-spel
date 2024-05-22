@@ -1,4 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿// See https://aka.ms/new-console-template for more information - Nej, det tänker jag inte göra
 using spiel;
 
 //De globala variabler som används av spelet, t.ex antal rundon, totalt antal kills, poäng o.s.v
@@ -13,9 +13,10 @@ List<Entity> enemies = new List<Entity>();
 List<int> roundpoints = new List<int>();
 Player player;
 
-//Spelets huvud-loop, körs alltid
+//Spelets huvud-loop, körs (nästan) alltid (tills den inte gör det mer, big IQ wrinkle-brain koncept ikr)
 while(!gameover)
 {
+    //Att använda Clear-metoden motsvarar att anropa MS-DOS cls-kommandot i kommandotolksfönstret. När Clear-metoden anropas rullar markören automatiskt till det övre vänstra hörnet av fönstret och innehållet i skärmbufferten ställs in på tomrum med de aktuella bakgrundsfärgerna i förgrunden.
     Console.Clear();
     //kontrollerar om detta är fösta gången loopen körs (vilket innebär första rundan av spelomgången), ger möjlighet att spela en tutorial om så är fallet
     if(introduction)
@@ -60,6 +61,7 @@ void StartGame()
     //skapar ett smupmässigt antal fiender där varje fiendes typ är slumpvald
     for(int i = 0; i < spawn; i++)
     {
+        //tre är det magiska talet i datorspelsdesign, alla vet att om någonting ska fungera måste det ske 3 gånger, vill du klara din quest? Hitta 3 guldägg, vill du döda svampen? Hoppa på den 3 gånger, vill du dyrka ett lås? tryck ned alla 3 låspinnar (i rätt ordning)! Därav finns det tre fiendetyper för att allting ska jobba på "Peak" Efficiency!
         int enemytype = rng.Next(0, 3);
         Entity newenemy;
         switch(enemytype)
@@ -100,7 +102,8 @@ void PlayerTurn()
     Console.WriteLine("");
 
     string input = Console.ReadLine();
-    //kontrollerar om splarens input är felaktigt och om så är fallet visas felmedelande och Playerturn metoden kallas igen
+    //kontrollerar om splarens input är felaktigt och om så är fallet visas felmedelande och Playerturn metoden kallas igen. 
+    //Varför i helvete gjorde jag detta istället för att abvända ett else-statement? Ingen vet, inte ens jag. 
     if(input != "Stats" && input != "Attack" && input!= "Spells" && input!= "Misc" && input!= "Surrender")
     {
         Console.Clear();
@@ -124,7 +127,7 @@ void PlayerTurn()
             Console.WriteLine("You Attacked " + enemies[targetindex].Name + " [" + targetindex + "] for " + takendamage + " Damage");
             if(enemies[targetindex].HP <= 0)
             {
-                Console.WriteLine(enemies[targetindex].Name + " [" + input + "] died");
+                Console.WriteLine(enemies[targetindex].Name + " [" + input + "] died"); //användning av input här, men ej ovan, hur trött i hue va man när man skrev detta? Ba liksom, varför tho
                 points += enemies[targetindex].KillPoints;
                 enemies.RemoveAt(targetindex);
                 kills++;
@@ -189,6 +192,7 @@ void PlayerTurn()
             Console.WriteLine("");
             Console.Write("Enter Enemy Index: ");
             input = Console.ReadLine();
+            //försöker utföra anfall med givet input, om inpuit ej är giltigt (index out of range) eller input är bokstä ... https://www.youtube.com/watch?v=dv13gl0a-FA 
             try
             {
                 int targetindex = int.Parse(input);
@@ -216,13 +220,14 @@ void PlayerTurn()
                 PlayerTurn();
             }
         }
-        //If-Statement förebygger softlock bugg om Smite dödar sista fienden, utan det fastnar spelet i Handlingsmenyn/Playerturn-Funktionen utan möjlighet att nå gameover state
+        //If-Statement förebygger softlock bugg om Smite dödar sista fienden, utan det fastnar spelet i Handlingsmenyn/Playerturn-Funktionen utan möjlighet att nå roundover state
         if(!roundover)
         {
             PlayerTurn();
         }
     }
 
+    //Styr misc-handlingar, till skillnad från spells används en annan valuta samt kallar inte nödvändigtvis playerturn-metoden 
     if(input == "Misc")
     {
         Console.Clear();
@@ -237,7 +242,6 @@ void PlayerTurn()
             player.MiscActions(0);
             Console.WriteLine("Defense increased by 5");
             Console.ReadLine();
-            //input = "Defend";
         }
 
         else if(input == "Sharpen Blade" && turnpoints >= 5)
@@ -247,9 +251,9 @@ void PlayerTurn()
             Console.WriteLine("5 bonus damage for next attack");
             Console.ReadLine();
             turnpoints = 5;
-            //input = "Sharpen Blade";
         }
 
+        //lösning som krävde genomsnittligt högre intelligensanvändning än metoden vilken detta if-statement är en del av, ibland kan det vara smart att bruka else, vem had kunnat ana!
         else
         {
             Console.Clear();
@@ -258,13 +262,15 @@ void PlayerTurn()
             PlayerTurn();
         }
 
+        //fattig implimentering för att hantera skillnaden mellan att köra vidare timeline eller ej.
         if(input != "Sharpen Blade")
         {
             PlayerTurn();
         }
-        //PlayerTurn();
+        //PlayerTurn(); Rouge bit av borttagen kod, otroligt nog ej lika vanligt förkommande i detta program/denna klass som vanligtvis... 
     }
 
+    //Hur avslutar man en pågående spelrunda egentligen? Som man burkar säga: "When in doubt... Kalla skadefunktionen med ett stort tal och hoppas det löser problemet" - Sun Tzu
     if(input == "Surrender")
     {
         player.TakeDamage(800);

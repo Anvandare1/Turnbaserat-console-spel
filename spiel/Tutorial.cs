@@ -1,8 +1,9 @@
 namespace spiel
 {
+    //klass dedikerad till att skriva tutorial, mycket proffsigt skriven med endast massiva block av Console.WriteLine, 11/10 - IGN
     public class Tutorial
     {
-        //Massiv funktion för all skriva ut tutorial, uppdelat enligt berörd del av spelet. Ger ett även ett exempel på hur man spelar
+        //Massiv metod för all skriva ut tutorial, uppdelat enligt berörd del av spelet. Ger ett även ett exempel på hur man spelar
         public void DisplayTutorial()
         {
             //tutorial för spelar input, berättar hur spelaren förväntas styra spelet
@@ -185,4 +186,40 @@ namespace spiel
             Console.Clear();
         }
     }
+
+                                                                                                                                                                                                                                       //Alte Freunde, die Tage gezählt
+                                                                                                                                                                                                                                       //Gesichter wie Berge, verwittert und zäh
+                                                                                                                                                                                                                                       //Früher zusammen, die Zeit hat's getrennt
+                                                                                                                                                                                                                                       //Nur noch Staub im Wind
+                                                                                                                                                                                                                                       //Ich hab gesehen, wie es gestern war
+                                                                                                                                                                                                                                       //Die Welt wird sich drehen, war schon vor uns da
+                                                                                                                                                                                                                                       //Es ist egal, was du tust
+                                                                                                                                                                                                                                       //Wir sind Segen und Fluch
+                                                                                                                                                                                                                                       //
+                                                                                                                                                                                                                                       //Heute endet es – ein letztes Gefecht
+                                                                                                                                                                                                                                       //Wie weit kannst du gehen
+                                                                                                                                                                                                                                       //Heute endet es - eine letzte Schlacht
+                                                                                                                                                                                                                                       //Und dann kommt die Flut
+                                                                                                                                                                                                                                       //
+                                                                                                                                                                                                                                       //Schmerz ist in dir, faucht wie ein Tier
+                                                                                                                                                                                                                                       //Im Käfig aus Gold, will er weg von dir
+                                                                                                                                                                                                                                       //Fühlst du es nicht, wie das Eis zerbricht
+                                                                                                                                                                                                                                       //Und das Licht verlischt
+                                                                                                                                                                                                                                       //Hörst du die Stimmen, in dieser kalten Welt
+                                                                                                                                                                                                                                       //Ein Chor der Sinne, das Lied der Ewigkeit
+                                                                                                                                                                                                                                       //Bist du bereit, dein letzter Wille stark
+                                                                                                                                                                                                                                       //Und der Tag vergeht
+                                                                                                                                                                                                                                       //
+                                                                                                                                                                                                                                       //Heute endet es – ein letztes Gefecht
+                                                                                                                                                                                                                                       //Wie weit kannst du gehen
+                                                                                                                                                                                                                                       //Heute endet es - eine letzte Schlacht
+                                                                                                                                                                                                                                       //Und dann kommt die Flut
+                                                                                                                                                                                                                                       //
+                                                                                                                                                                                                                                       //Heute endet es – ein letztes Gefecht
+                                                                                                                                                                                                                                       //Wie weit kannst du gehen
+                                                                                                                                                                                                                                       //Heute endet es - eine letzte Schlacht
+                                                                                                                                                                                                                                       //Und dann kommt die Flut
+                                                                                                                                                                                                                                       //Und dann kommt die Flut
+
+                                                                                                                                                                                                                                       //Text till Die Flut - Warkings 
 }

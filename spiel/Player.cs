@@ -23,6 +23,7 @@ namespace spiel
             }
         }
 
+        //Override av anfallsmetoden, syfte att implimentera bonusskadehantering
         public override int Attack(Entity target)
         {
             if(bonusdamage > 0)
@@ -36,12 +37,12 @@ namespace spiel
         //Konsturktor specialiserad för spelar-klassen, 
         public Player() : base(20, 5, 0, "Player")
         {
-            this.mana = 10;
+            this.mana = 10; //Rouge "this" nycekord/modifikator, monumentet för fenomenet restes 2024-05-22 och har lockar åskådare från land och rike runt sedan dess. Ja jag är för lat för att ta bort modifikatiorn men inte för lat för att skriva denna svinlånga komentar precis bredvid den istället för att trycka på backspace fem gånger, prioriteringarna är spikraka här sir!
             bonusdamage = 0;
         }
         public override int TakeDamage(int damage)
         {
-            //Bestämer hur skadan och försvaret ska hanteras 
+            //Bestämer hur skadan och försvaret ska hanteras, använder den legendariska switch - case - return strukturen, vissa skulle påstå att switch - case - break är vanligare men i denna ekonomi har vi inte råd med sådant 
             switch(defense)
             {
                 case > 0:
